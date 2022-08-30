@@ -1,0 +1,97 @@
+.hidden {
+    display: none;
+}
+
+.absolute {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#editor_screen {
+    transform-origin: top left;
+    transform: scale(0.75);
+    border: 2px solid black;
+    width: 1920px;
+    height: 1080px;
+}
+
+#editor_controls {
+    position: relative;
+    top: calc(-1080px * 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1440px;
+}
+
+.control_button {
+    margin: 4px;
+    font-size: 16px;
+}
+
+#monitor_previews {
+    position: relative;
+    width: 100%;
+}
+
+.monitor_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview_image {
+    width: calc(100% - 8px);
+    height: auto;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+#enlarged_image_container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+#enlarged_background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.75;
+}
+
+#enlarged_image {
+    position: absolute;
+    left: 0;
+    top: 1%;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    transform-origin: top center;
+    transform: scale(0.9);
+    opacity: 1;
+}
+
+#main_image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: none;
+}
+
+#upload_image_preview {
+    max-height: 35vh;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid black;
+}
