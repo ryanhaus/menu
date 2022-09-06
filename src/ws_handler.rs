@@ -6,9 +6,20 @@ use std::thread;
 use serde_json::Value as Json;
 use ws::util::Token;
 
+use crate::config;
+
 pub fn create_ws_thread() {
     thread::spawn(move ||
-        ws::listen("192.168.1.246:7778", |out| { Socket { out: out, room: String::from(""), socket_index: -1 } }).unwrap()
+        ws::listen(
+            format!("{}:{}", config::IP_ADDR, config::WS_PORT),
+            |out| { 
+                Socket {
+                    out: out,
+                    room: String::from(""), 
+                    socket_index: -1
+                } 
+            })
+            .unwrap()
     );
 }
 

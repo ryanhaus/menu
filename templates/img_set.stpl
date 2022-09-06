@@ -1,7 +1,6 @@
 <html>
     <head>
         <title>Upload a new image</title>
-        
         <script src="/static/scripts/img_upload_page.js"></script>
         <link rel="stylesheet" href="/static/styles/styles.css" />   
     </head>
