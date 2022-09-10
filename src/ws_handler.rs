@@ -1,6 +1,5 @@
 extern crate env_logger;
 extern crate ws;
-extern crate serde_json;
 
 use std::thread;
 use serde_json::Value as Json;

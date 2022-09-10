@@ -1,6 +1,7 @@
 mod config;
 mod pages;
 mod ws_handler;
+mod svg_parse;
 
 use rocket::{
     launch, routes, fs, Config,

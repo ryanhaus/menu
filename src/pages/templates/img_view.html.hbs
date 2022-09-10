@@ -2,12 +2,12 @@
     <head>
         <title>Viewing image</title>
 
-        <script>const config = { PAGE_ID: "<%= monitor_id %>", IP_ADDR: "<%= ip_addr %>", WS_PORT: <%= ws_port %> };</script>
+        <script>const config = { PAGE_ID: "{{ monitor_id }}", IP_ADDR: "{{ ip_addr }}", WS_PORT: {{ ws_port }} };</script>
         <script src="/static/scripts/view_monitor.js"></script>
     
         <link rel="stylesheet" href="/static/styles/styles.css" />
     </head>
     <body>
-        <img id="main_image" src="/img/<%= monitor_id %>" draggable="false" />
+        <img id="main_image" src="/img/{{ monitor_id }}" draggable="false" />
     </body>
 </html>

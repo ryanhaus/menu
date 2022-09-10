@@ -1,14 +1,8 @@
 use rocket::{ get, http::ContentType };
-use sailfish::TemplateOnce;
 
-#[derive(TemplateOnce)]
-#[template(path = "img_set.stpl")]
-struct ImgSetTemplate {
-    monitor_count: i32
-}
+const INDEX_FILE_SRC: &'static str = include_str!("templates/img_set.html");
 
 #[get("/")]
-pub fn index() -> (ContentType, String) {
-    let ctx = ImgSetTemplate { monitor_count: 5 };
-    (ContentType::HTML, ctx.render_once().unwrap())
+pub fn index() -> (ContentType, &'static str) {
+    (ContentType::HTML, INDEX_FILE_SRC)
 }
