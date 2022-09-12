@@ -2,7 +2,7 @@ extern crate env_logger;
 extern crate ws;
 
 use std::thread;
-use serde_json::Value as Json;
+use serde_json::Value;
 use ws::util::Token;
 
 use crate::config;
@@ -38,7 +38,7 @@ impl ws::Handler for Socket {
 
     fn on_message(&mut self, msg: ws::Message) -> ws::Result<()> {
         // attempt to parse message as JSON
-        if let Ok(json) = serde_json::from_str::<Json>(msg.as_text()?) {
+        if let Ok(json) = serde_json::from_str::<Value>(msg.as_text()?) {
             // attempt to get the message type
             let m_type_val = json.get("message_type");
             if m_type_val == None {
