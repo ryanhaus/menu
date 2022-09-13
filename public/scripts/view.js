@@ -8,7 +8,7 @@ function ws_message(m) {
 
     switch (content.message_type) {
         case "RELOAD":
-            document.querySelector("img#main_image").src = `/img/${config.PAGE_ID}?${new Date().getTime()}`;
+            document.querySelector("img#main_image").src = `/file/${config.PAGE_ID}?${new Date().getTime()}`;
             break;
     }
 }

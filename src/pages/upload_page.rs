@@ -11,13 +11,12 @@ pub struct ImageUploadData<'a> {
 }
 
 #[post("/upload_image", data="<form_data>")]
-pub async fn upload_image(mut form_data: form::Form<ImageUploadData<'_>>) -> io::Result<response::Redirect> {
+pub async fn upload_page(mut form_data: form::Form<ImageUploadData<'_>>) -> io::Result<response::Redirect> {
     let image_file_name = form_data.monitor_id.clone();
     let file_destination = format!("data/{}.bin", image_file_name);
 
     form_data.monitor_image.move_copy_to(file_destination).await?;
     
-    // TODO: use JSON instead of different extension files, and use my parser if we received a SVG file. also figure out some way to communicate to the client side what we're editing or not. maybe also figure out a way for chad to set which texts are editable or not
     let image_file_type = form_data.monitor_image
         .content_type().unwrap()
         .extension().unwrap()
@@ -36,11 +35,9 @@ pub async fn upload_image(mut form_data: form::Form<ImageUploadData<'_>>) -> io:
     fs::write("data/extensions.json", serde_json::to_string(&json).unwrap())?;
 
     unsafe {
-        println!("{:#?}", ws_handler::SOCKETS_IN_ROOMS);
-
-        for socket_pref in &ws_handler::SOCKETS_IN_ROOMS {
-            let socket = &**socket_pref;
-            println!("{:?}, {:?}", (socket_pref, socket), (&image_file_name, &socket.room));
+        for socket in &ws_handler::SOCKETS_IN_ROOMS {
+            let socket = &**socket;
+            
             if &image_file_name == &socket.room {
                 if !socket.out.send("{\"message_type\":\"RELOAD\"}").is_err() { continue }
             }

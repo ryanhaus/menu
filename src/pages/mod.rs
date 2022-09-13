@@ -1,4 +1,4 @@
-pub mod index;
-pub mod get_img_file;
-pub mod view_monitor;
-pub mod upload_image;
+pub mod index_page;
+pub mod get_file;
+pub mod view_page;
+pub mod upload_page;

@@ -22,10 +22,10 @@ fn rocket() -> _ {
 
     rocket::custom(figment)
         .mount("/", routes![
-            pages::index::index,
-            pages::get_img_file::get_img_file,
-            pages::view_monitor::view_monitor,
-            pages::upload_image::upload_image
+            pages::index_page::index_page,
+            pages::get_file::get_file,
+            pages::view_page::view_page,
+            pages::upload_page::upload_page
         ])
         .mount("/static", fs::FileServer::from("public/"))
 }

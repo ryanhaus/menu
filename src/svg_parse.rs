@@ -43,7 +43,7 @@ impl ParsedSVG {
 
             let node = node.unwrap();
 
-            if node.name == "text" {
+            if node.name == name {
                 nodes.push(Box::new(element.to_owned()));
             }
             else {
