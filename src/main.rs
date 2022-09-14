@@ -1,7 +1,6 @@
 mod config;
 mod pages;
 mod ws_handler;
-mod svg_parse;
 
 use rocket::{
     launch, routes, fs, Config,
@@ -25,6 +24,7 @@ fn rocket() -> _ {
             pages::index_page::index_page,
             pages::get_file::get_file,
             pages::view_page::view_page,
+            pages::edit_page::edit_page,
             pages::upload_page::upload_page
         ])
         .mount("/static", fs::FileServer::from("public/"))

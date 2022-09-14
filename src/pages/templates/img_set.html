@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Upload a new image</title>
+        <script src="/static/scripts/svg_detect.js"></script>
         <script src="/static/scripts/img_upload_page.js"></script>
         <link rel="stylesheet" href="/static/styles/styles.css" />   
     </head>
@@ -32,19 +33,24 @@
         <span id="monitor_previews">
             <div class="monitor_container">
                 <span>
-                    <img class="preview_image" src="/file/1" id="img_1" onclick="enlarge(this)" draggable="false" />
+                    <img class="preview_image" src="/file/1" id="img_1" onload="svg_detect(this, 1);" onclick="enlarge(this)" draggable="false" />
+                    <a class="edit_image" style="display: none;" href="/edit/1" target="_blank">Edit</a>
                 </span>
                 <span>
-                    <img class="preview_image" src="/file/2" id="img_2" onclick="enlarge(this)" draggable="false" />
+                    <img class="preview_image" src="/file/2" id="img_2" onload="svg_detect(this, 2);" onclick="enlarge(this)" draggable="false" />
+                    <a class="edit_image" style="display: none;" href="/edit/2" target="_blank">Edit</a>
                 </span>
                 <span>
-                    <img class="preview_image" src="/file/3" id="img_3" onclick="enlarge(this)" draggable="false" />
+                    <img class="preview_image" src="/file/3" id="img_3" onload="svg_detect(this, 3);" onclick="enlarge(this)" draggable="false" />
+                    <a class="edit_image" style="display: none;" href="/edit/3" target="_blank">Edit</a>
                 </span>
                 <span>
-                    <img class="preview_image" src="/file/4" id="img_4" onclick="enlarge(this)" draggable="false" />
+                    <img class="preview_image" src="/file/4" id="img_4" onload="svg_detect(this, 4);" onclick="enlarge(this)" draggable="false" />
+                    <a class="edit_image" style="display: none;" href="/edit/4" target="_blank">Edit</a>
                 </span>
                 <span>
-                    <img class="preview_image" src="/file/5" id="img_5" onclick="enlarge(this)" draggable="false" />
+                    <img class="preview_image" src="/file/5" id="img_5" onload="svg_detect(this, 5);" onclick="enlarge(this)" draggable="false" />
+                    <a class="edit_image" style="display: none;" href="/edit/5" target="_blank">Edit</a>
                 </span>
             </div>
         </span>
