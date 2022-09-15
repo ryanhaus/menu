@@ -3,3 +3,4 @@ pub mod get_file;
 pub mod view_page;
 pub mod edit_page;
 pub mod upload_page;
+pub mod download_page;

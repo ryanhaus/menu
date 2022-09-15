@@ -25,7 +25,8 @@ fn rocket() -> _ {
             pages::get_file::get_file,
             pages::view_page::view_page,
             pages::edit_page::edit_page,
-            pages::upload_page::upload_page
+            pages::upload_page::upload_page,
+            pages::download_page::download_page
         ])
         .mount("/static", fs::FileServer::from("public/"))
 }
