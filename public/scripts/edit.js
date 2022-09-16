@@ -42,3 +42,17 @@ function is_not_svg() {
     alert("Could not edit this image because it either does not exist or is not a .svg file");
     window.close();
 }
+
+function upload() {
+    let
+        request = new XMLHttpRequest(),
+        svg_src = document.querySelector("img#editing_image").getAttribute("src"),
+        file = new File([svg_src.substring(24)], "edited.svg", { type: "image/svg+xml" }),
+        form_data = new FormData();
+
+    form_data.append("monitor_id", config.PAGE_ID);
+    form_data.append("monitor_image", file);
+
+    request.open("POST", "/upload_image");
+    request.send(form_data);
+}

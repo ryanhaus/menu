@@ -11,10 +11,14 @@
         <h1>Editing image {{ monitor_id }}</h1>
         <span id="editing_space">
             <img id="editing_image" />
-            <form id="edit_form">
+            <form id="edit_form" onsubmit="upload()">
                 <h3>Text values:</h3>
                 <span id="text_editors"></span>
+
+                <br />
+                <input type="submit" value="Upload changes" />
             </form>
+
         </span>
     </body>
 </html>
