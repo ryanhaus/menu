@@ -88,6 +88,7 @@ a {
     transform-origin: top center;
     transform: scale(0.9);
     opacity: 1;
+    background-color: white;
 }
 
 #main_image {

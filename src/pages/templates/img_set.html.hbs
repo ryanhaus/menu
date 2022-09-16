@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Upload a new image</title>
+        <script src="/static/scripts/svg_detect.js"></script>
+        <script src="/static/scripts/img_upload_page.js"></script>
+        <link rel="stylesheet" href="/static/styles/styles.css" />   
+    </head>
+    <body>
+        <h3>Upload a new image</h3>
+
+        <form action="/upload_image" method="post" enctype="multipart/form-data">
+            <label for="monitor_id">Select a monitor:</label>
+            <select name="monitor_id" onchange="change_preview(this.value)">
+                {{#each [1,2,3,4,5] }}
+                    <option value="{{ this }}">Monitor {{ this }}</option>
+                {{/each}}
+            </select>
+            <br />
+
+            <label for="monitor_image">Select an image:</label>
+            <input id="image_input" type="file" name="monitor_image" accept="image/*" required />
+            <br />
+
+            <img id="upload_image_preview" style="display: none;" />
+            <br />
+
+            <input type="submit" value="Change monitor image" />
+        </form>
+
+        <h3>Monitor previews</h3>
+        <span id="monitor_previews">
+            <div class="monitor_container">
+                {{#each [1,2,3,4,5] }}
+                    <span>
+                        <img class="preview_image" src="/file/{{ this }}" id="img_{{ this }}" onload="svg_detect(this, {{ this }});" onclick="enlarge(this)" draggable="false" />
+
+                        <span>
+                            <a class="edit_image" href="/edit/{{ this }}" target="_blank">Quick Edit</a>
+                            <br />
+                            <a class="edit_image" href="/download/{{ this }}.svg" target="_blank" onclick="window.open('//boxy-svg.com/app')">Download image and open BoxySVG</a>
+                            <br />
+                        </span>
+
+                        <a href="/view/{{ this }}" target="_blank">Open monitor</a>
+                    </span>
+                {{/each}}
+            </div>
+        </span>
+
+        <div style="width: 100%; text-align: center;">
+            <i style="font-size: 24px;">Click a monitor preview to enlarge it</i>
+            <br />
+
+            <b style="font-size: 16px;">Please make sure that all images have a 16:9 ratio before uploading</b>
+        </div>
+
+        <div id="enlarged_image_container" style="display: none;" onclick="this.style.display = 'none'">
+            <div id="enlarged_background"></div>
+            <img id="enlarged_image" src="/file/1" draggable="false" />
+            <br />
+
+            <div style="width: 100%; text-align: center; position: absolute; left: 0; top: 92.5%;">
+                <i style="font-size: 2.5vh; color: white;">Click anywhere to close</i>
+            </div>
+        </div>
+    </body>
+</html>
