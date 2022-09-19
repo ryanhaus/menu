@@ -26,7 +26,8 @@ window.addEventListener("load", () => {
 
 function update_text(child, value) {
     let edit_img = document.querySelector("img#editing_image");
-    let xml_src = new DOMParser().parseFromString(edit_img.getAttribute("src").substring(24), "text/xml");
+    let decoded = decodeURIComponent(edit_img.getAttribute("src").substring(24));
+    let xml_src = new DOMParser().parseFromString(decoded, "text/xml");
 
     xml_src.children[0].children[child].innerHTML = value;
 
@@ -35,7 +36,7 @@ function update_text(child, value) {
 
 function set_image(xml) {
     let string_src = new XMLSerializer().serializeToString(xml);
-    document.querySelector("img#editing_image").setAttribute("src", `data:image/svg+xml;utf8,${string_src}`);
+    document.querySelector("img#editing_image").setAttribute("src", `data:image/svg+xml;utf8,${encodeURIComponent(string_src)}`);
 }
 
 function is_not_svg() {
@@ -47,7 +48,7 @@ function upload() {
     let
         request = new XMLHttpRequest(),
         svg_src = document.querySelector("img#editing_image").getAttribute("src"),
-        file = new File([svg_src.substring(24)], "edited.svg", { type: "image/svg+xml" }),
+        file = new File([decodeURIComponent(svg_src.substring(24))], "edited.svg", { type: "image/svg+xml" }),
         form_data = new FormData();
 
     form_data.append("monitor_id", config.PAGE_ID);
