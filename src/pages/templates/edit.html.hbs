@@ -10,7 +10,7 @@
     <body>
         <h1>Editing image {{ monitor_id }}</h1>
         <span id="editing_space">
-            <img id="editing_image" />
+            <img id="editing_image" style="max-width: 75%;" />
             <form id="edit_form" onsubmit="upload()">
                 <h3>Text values:</h3>
                 <span id="text_editors"></span>
@@ -19,7 +19,7 @@
 
                 <h3>Images:</h3>
                 <span id="image_editors"></span>
-                
+
                 <br />
                 <input type="submit" value="Upload changes" />
             </form>

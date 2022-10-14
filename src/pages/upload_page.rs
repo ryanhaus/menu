@@ -1,10 +1,10 @@
+#![allow(clippy::unnecessary_lazy_evaluations)]
 use rocket::{ post, form, fs as rfs, response };
 use std::{ fs, io };
 use serde_json::{ Value, Map };
 use crate::ws_handler;
 
-#[derive(form::FromForm)]
-#[derive(Debug)]
+#[derive(form::FromForm, Debug)]
 pub struct ImageUploadData<'a> {
     monitor_id: String,
     monitor_image: rfs::TempFile<'a>
@@ -38,9 +38,7 @@ pub async fn upload_page(mut form_data: form::Form<ImageUploadData<'_>>) -> io::
         for socket in &ws_handler::SOCKETS_IN_ROOMS {
             let socket = &**socket;
             
-            if &image_file_name == &socket.room {
-                if !socket.out.send("{\"message_type\":\"RELOAD\"}").is_err() { continue }
-            }
+            if image_file_name == socket.room && socket.out.send("{\"message_type\":\"RELOAD\"}").is_ok() { continue }
         }
     }
 

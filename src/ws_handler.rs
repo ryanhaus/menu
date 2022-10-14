@@ -13,7 +13,7 @@ pub fn create_ws_thread() {
             format!("{}:{}", config::IP_ADDR, config::WS_PORT),
             |out| { 
                 Socket {
-                    out: out,
+                    out,
                     room: String::from(""), 
                     socket_index: -1
                 } 
@@ -41,7 +41,7 @@ impl ws::Handler for Socket {
         if let Ok(json) = serde_json::from_str::<Value>(msg.as_text()?) {
             // attempt to get the message type
             let m_type_val = json.get("message_type");
-            if m_type_val == None {
+            if m_type_val.is_none() {
                 return self.out.close_with_reason(
                     ws::CloseCode::Invalid,
                     "Packet was JSON, but did not contain a message type"
@@ -50,7 +50,7 @@ impl ws::Handler for Socket {
 
             // attempt to get message type value as a string
             let message_type = m_type_val.unwrap().as_str();
-            if message_type == None {
+            if message_type.is_none() {
                 return self.out.close_with_reason(
                     ws::CloseCode::Invalid,
                     "JSON object contained a message type, but could not be parsed as a string"
@@ -62,7 +62,7 @@ impl ws::Handler for Socket {
                 "GIVE_PAGE" => { // GIVE_PAGE: tells the server which page (monitor) this socket is from
                     // attempt to get the page value
                     let page_val = json.get("page");
-                    if page_val == None {
+                    if page_val.is_none() {
                         return self.out.close_with_reason(
                             ws::CloseCode::Invalid,
                             "Packet of type 'GIVE_PAGE' did not contain a page value"
@@ -71,7 +71,7 @@ impl ws::Handler for Socket {
 
                     // attempt to get the page as a string
                     let page = page_val.unwrap().as_str();
-                    if page == None {
+                    if page.is_none() {
                         return self.out.close_with_reason(
                             ws::CloseCode::Invalid,
                             "Packet of type 'GIVE_PAGE' did contain a page value, but it could not be parsed as a string"
@@ -92,13 +92,13 @@ impl ws::Handler for Socket {
                 },
 
                 // not one of the given message types
-                _ => return self.out.close_with_reason(
+                _ => self.out.close_with_reason(
                     ws::CloseCode::Invalid,
                     "Message type is not recognized"
                 )
             }
         } else {
-            return self.out.close_with_reason(
+            self.out.close_with_reason(
                 ws::CloseCode::Invalid,
                 "Received content could not be parsed as a JSON object"
             )

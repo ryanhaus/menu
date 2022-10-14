@@ -1,7 +1,7 @@
 use handlebars::Handlebars;
 use rocket::{ get, http::ContentType };
 
-const INDEX_FILE_SRC: &'static str = include_str!("templates/img_set.html.hbs");
+const INDEX_FILE_SRC: &str = include_str!("templates/img_set.html.hbs");
 
 #[get("/")]
 pub fn index_page() -> (ContentType, String) {
